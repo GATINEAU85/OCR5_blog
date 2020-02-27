@@ -1,0 +1,54 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<body style="background-color:#E3CFCD">
+  <!-- Main Content -->
+ <!-- Contact Section -->
+    <section class="page-section" id="contact">
+        <div class="container jumbotron" style="background-color:white">
+          <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+              <h2 class="mt-0">Contactez-moi !</h2>
+              <hr class="divider my-4">
+              <p class="text-muted mb-5">N'hésitez pas à me contacter pour tout renseignement ! </p>
+            </div>
+          </div>
+          <div class="row">
+              <div class="col-6 offset-3" text-center>
+                  <form name="sentMessage" id="contactForm" novalidate>
+                  <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                      <input type="text" class="form-control" placeholder="Nom" id="name" required data-validation-required-message="Entrez votre nom.">
+                      <p class="help-block text-danger"></p>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                      <input type="email" class="form-control" placeholder="Mail" id="email" required data-validation-required-message="Entrez votre adresse mail">
+                      <p class="help-block text-danger"></p>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <div class="form-group col-xs-12 floating-label-form-group controls">
+                      <input type="tel" class="form-control" placeholder="Portable" id="phone" required data-validation-required-message="Entrez votre numéro de téléphone">
+                      <p class="help-block text-danger"></p>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                      <textarea rows="5" class="form-control" placeholder="Message" id="message" required data-validation-required-message="Entrez un message"></textarea>
+                      <p class="help-block text-danger"></p>
+                    </div>
+                  </div>
+                  <br>
+                  <div id="success"></div>
+                  <div class="form-group text-center">
+                    <button type="submit" class="btn btn-primary  btn-xl" id="sendMessageButton">Envoyer</button>
+                  </div>
+                </form>
+            </div>
+        </div>
+    </div>
+   </section>
+</body>
+{% endblock %}
