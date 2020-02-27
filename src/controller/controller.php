@@ -38,14 +38,26 @@ function listPosts()
 //---------- Redirection vers la page d'un post en particulier ----------
 function post()
 {
+    require 'vendor/autoload.php';
+
     $loader = new Twig_Loader_Filesystem('templates');
     $twig = new Twig_Environment($loader, [
         'cache' => false, //__DIR__.'/tmp'
     ]);
+    
+    $post = new PostManager;
+    $post = $post->getPost($_GET['id']);
+    
+//    $comment = new PostComment;
+//    $comment = $posts->getComment();
+//    
 //    $post = getPost($_GET['id']);
 //    $comments = getComments($_GET['id']);
 
-    echo $twig->render('post.html.twig');
+    echo $twig->render('post.html.twig', [
+        'post' => $post,
+//        'comment' => $comment,
+    ]);
 }
 
 //---------- Redirection vers la page de contact ----------
@@ -74,3 +86,16 @@ function about()
 
     echo $twig->render('about.html.twig');
 }
+
+function login()
+{
+    require 'vendor/autoload.php';
+
+    $loader = new Twig_Loader_Filesystem('templates');
+    $twig = new Twig_Environment($loader, [
+        'cache' => false, //__DIR__.'/tmp'
+    ]);
+
+    echo $twig->render('login.html.twig');
+}
+
