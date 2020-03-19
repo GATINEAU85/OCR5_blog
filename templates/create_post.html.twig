@@ -1,0 +1,60 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<body style="background-color:#E3CFCD">
+  <!-- Main Content -->
+ <!-- Contact Section -->
+    <section class="page-section" id="contact">
+        <div class="container jumbotron" style="background-color:white">
+          <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+              <h2 class="mt-0">Ajouter un post</h2>
+              <hr class="divider my-4">
+              <p class="text-muted mb-5">À vos marques, prêts, postez !</p>
+            </div>
+          </div>
+          <div class="row">
+              <div class="col-6 offset-3" text-center>
+                  <form name="addPostForm" id="addPostForm" method="post" action="index.php?action=addPost" novalidate>
+                  <div class="control-group" style="display:none">
+                    <div class="form-group floating-label-form-group controls">
+                      <input type="text" class="form-control" placeholder="Id" id="postId" name="postId" required value="new">
+                      <p class="help-block text-danger"></p>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                      <input type="text" class="form-control" placeholder="Titre" id="postTitre" name="postTitre" required data-validation-required-message="Entrez le titre de votre post.">
+                      <p class="help-block text-danger"></p>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <div class="form-group col-xs-12 floating-label-form-group controls">
+                      <input type="text" class="form-control" placeholder="Auteur" id="postAuteur" name="postAuteur" required data-validation-required-message="Entrez le nom de l'auteur">
+                      <p class="help-block text-danger"></p>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                      <textarea rows="5" cols="50" type="text" class="form-control" placeholder="Description brève" id="postChapo" name="postChapo" required data-validation-required-message="Entrez le chapo du post"></textarea>
+                      <p class="help-block text-danger"></p>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <div class="form-group col-xs-12 floating-label-form-group controls">
+                      <textarea  rows="5" cols="50" type="text" class="form-control" placeholder="Contenu" id="postContenu" name="postContenu" required data-validation-required-message="Ecrivez le contenu de votre post"></textarea>
+                      <p class="help-block text-danger"></p>
+                    </div>
+                  </div>
+                  <br>
+                  <div id="success"></div>
+                  <div class="form-group text-center">
+                    <button type="submit" class="btn btn-primary  btn-xl" id="addPostBtn" name="addPostBtn">Poster</button>
+                  </div>
+                </form>
+            </div>
+        </div>
+    </div>
+   </section>
+</body>
+{% endblock %}
