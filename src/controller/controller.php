@@ -1,101 +1,20 @@
 <?php
 
-require('src/model/model.php');
-require_once('src/model/PostManager.php');
-require('src/model/CommentManager.php');
+namespace App\src\controller;
 
-//---------- Redirection vers la page d acceuil ----------
-function home()
+use App\src\DAO\PostDAO;
+use App\src\DAO\CommentDAO;
+
+abstract class Controller extends TwigController
 {
-    require 'vendor/autoload.php';
-
-    $loader = new Twig_Loader_Filesystem('templates');
-    $twig = new Twig_Environment($loader, [
-        'cache' => false, //__DIR__.'/tmp'
-    ]);
-
-    echo $twig->render('index.html.twig');
-}
-
-
-//---------- Redirection vers la page de liste des posts ----------
-function listPosts()
-{
-    require 'vendor/autoload.php';
-
-    $loader = new Twig_Loader_Filesystem('templates');
-    $twig = new Twig_Environment($loader, [
-        'cache' => false, //__DIR__.'/tmp'
-    ]);
-    $posts = new PostManager;
-    $posts = $posts->getPosts();
+    protected $twig;
+    protected $commentDAO;
+    protected $postDAO;
     
-    echo $twig->render('list_post.html.twig', [
-        'posts' => $posts,
-    ]);
+    public function __construct()
+    {
+        $this->twig = parent::twigLoader();
+        $this->postDAO = new postDAO();
+        $this->commentDAO = new CommentDAO();
+    }
 }
-
-//---------- Redirection vers la page d'un post en particulier ----------
-function post()
-{
-    require 'vendor/autoload.php';
-
-    $loader = new Twig_Loader_Filesystem('templates');
-    $twig = new Twig_Environment($loader, [
-        'cache' => false, //__DIR__.'/tmp'
-    ]);
-    
-    $post = new PostManager;
-    $post = $post->getPost($_GET['id']);
-    
-//    $comment = new PostComment;
-//    $comment = $posts->getComment();
-//    
-//    $post = getPost($_GET['id']);
-//    $comments = getComments($_GET['id']);
-
-    echo $twig->render('post.html.twig', [
-        'post' => $post,
-//        'comment' => $comment,
-    ]);
-}
-
-//---------- Redirection vers la page de contact ----------
-function contact()
-{
-    require 'vendor/autoload.php';
-
-    $loader = new Twig_Loader_Filesystem('templates');
-    $twig = new Twig_Environment($loader, [
-        'cache' => false, //__DIR__.'/tmp'
-    ]);
-
-    echo $twig->render('contact.html.twig');
-}
-
-
-//---------- Redirection vers la page de contact ----------
-function about()
-{
-    require 'vendor/autoload.php';
-
-    $loader = new Twig_Loader_Filesystem('templates');
-    $twig = new Twig_Environment($loader, [
-        'cache' => false, //__DIR__.'/tmp'
-    ]);
-
-    echo $twig->render('about.html.twig');
-}
-
-function login()
-{
-    require 'vendor/autoload.php';
-
-    $loader = new Twig_Loader_Filesystem('templates');
-    $twig = new Twig_Environment($loader, [
-        'cache' => false, //__DIR__.'/tmp'
-    ]);
-
-    echo $twig->render('login.html.twig');
-}
-
