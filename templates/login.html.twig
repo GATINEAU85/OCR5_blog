@@ -1,31 +1,39 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-<body>
-
-  <!-- Page Header -->
-  <header id="mastList" class="masthead" style="background-image: url('public/img/home-bg.jpg'); height:200px;">
-    <div class="overlay" style="background-color:rgba(240, 225, 224, 0.6)"></div>
-    <div class="container">
-      <div class="row" style="height: 200px;"></div>
-      <div class="row text-center">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="site-heading">
-            <h1>Connexion</h1>
-            <span class="subheading"></span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
+<body id="beige_div">
   <!-- Main Content -->
   <div class="container">
-    <div class="row" style="margin:75px">
-      <div class="col-lg-8 col-md-10 mx-auto">
-          
-          
-      </div>
+    <div class="row">
+        <div class="col-md-5 offset-md-7" id="white_div">
+            <form class="text-center col-10 offset-1" style="padding-top:40%" method="post" action='index.php?action=login' >
+                <h1 class="text-uppercase font-weight-bold">Connexion</h1>
+                <hr>
+                {%  if session.get(key) %}
+                    <div class="alert alert-{{status}} alert-dismissible fade show" role="alert">
+                        {% if status == "danger" %}
+                            <strong>Echec : </strong>
+                        {% else %}
+                            <strong>Succès : </strong>
+                        {% endif %}
+                      {{ session.show(key) }}
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                {% endif %}
+                <div class="form-group">
+                  <label for="logPseudo">Pseudo</label>
+                  <input type="text" class="form-control" id="logPseudo" name="logPseudo" aria-describedby="pseudoHelp" placeholder="Pseudo">
+                </div>
+                <div class="form-group">
+                  <label for="logPassword">Mot de passe</label>
+                  <input type="password" class="form-control" id="logPassword" name="logPassword" placeholder="Mot de passe">
+                </div>
+                <a href="index.php?action=createAccount">Si tu n'as pas encore de compte, inscris-toi ! </a>
+                <button type="submit" class="btn btn-primary">Se connecter</button>
+            </form>
+        </div>
     </div>
   </div>
 </body>

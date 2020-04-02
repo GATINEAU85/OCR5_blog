@@ -3,9 +3,9 @@
 namespace App\src\constraint;
 use App\config\Parameter;
 
-class PostValidation extends Validation
+class CommentValidation extends Validation
 {
-    private $errors = [];
+    private $errors;
     private $constraint;
 
     public function __construct()
@@ -23,58 +23,42 @@ class PostValidation extends Validation
 
     private function checkField($name, $value)
     {
-        if($name === 'title') {
+        if($name === 'commentTitre') {
             $error = $this->checkTitle($name, $value);
             $this->addError($name, $error);
         }
-        elseif ($name === 'chapo') {
-            $error = $this->checkContent($name, $value);
-            $this->addError($name, $error);
-        }
-        elseif($name === 'content') {
-            $error = $this->checkAuthor($name, $value);
+        elseif ($name === 'commentContenu') {
+            $error = $this->checkComment($name, $value);
             $this->addError($name, $error);
         }
     }
 
     private function addError($name, $error) {
         if($error) {
-            $this->errors += [
-                $name => $error
-            ];
+            $this->errors = $error;
         }
     }
 
     private function checkTitle($name, $value)
     {
         if($this->constraint->notBlank($name, $value)) {
-            return $this->constraint->notBlank('titre', $value);
+            return $this->constraint->notBlank('commentTitre', $value);
         }
         if($this->constraint->minLength($name, $value, 2)) {
-            return $this->constraint->minLength('titre', $value, 2);
+            return $this->constraint->minLength('commentTitre', $value, 2);
         }
         if($this->constraint->maxLength($name, $value, 255)) {
-            return $this->constraint->maxLength('titre', $value, 255);
+            return $this->constraint->maxLength('commentTitre', $value, 255);
         }
     }
 
-    private function checkChapo($name, $value)
+    private function checkComment($name, $value)
     {
         if($this->constraint->notBlank($name, $value)) {
-            return $this->constraint->notBlank('chapo', $value);
+            return $this->constraint->notBlank('commentContenu', $value);
         }
         if($this->constraint->minLength($name, $value, 2)) {
-            return $this->constraint->minLength('chapo', $value, 2);
-        }
-    }
-    
-    private function checkContent($name, $value)
-    {
-        if($this->constraint->notBlank($name, $value)) {
-            return $this->constraint->notBlank('content', $value);
-        }
-        if($this->constraint->minLength($name, $value, 2)) {
-            return $this->constraint->minLength('content', $value, 2);
+            return $this->constraint->minLength('commentContenu', $value, 2);
         }
     }
 }

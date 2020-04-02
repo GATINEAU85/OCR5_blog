@@ -11,17 +11,17 @@
   <title>Adrien GATINEAU - Blog</title>
 
   <!-- Font Awesome Icons -->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
 
   <!-- Plugin CSS -->
-  <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+  <link href="../vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
 
   <!-- Theme CSS - Includes Bootstrap -->
-  <link href="public/css/creative.css" rel="stylesheet">
+  <link href="css/creative.css" rel="stylesheet">
 
 </head>
     
@@ -41,19 +41,21 @@
             <li class="nav-item">
                 <a class="nav-link js-scroll-trigger" href="index.php?action=listPosts">Blog Post</a>
             </li>
-            <li class="nav-item">
+{#            <li class="nav-item">
                 <a class="nav-link js-scroll-trigger" href="index.php?action=about">Qui suis-je ?</a>
-            </li>
+            </li>#}
             <li class="nav-item">
                 <a class="nav-link js-scroll-trigger" href="index.php?action=contact">Contact</a>
             </li>
-            {% if connect %}
+            {% if session.get('pseudo') %}
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="index.php?action=login">Logout<i class="fas fa-sign-out-alt"></i></a>
+                    <a class="nav-link js-scroll-trigger" href="index.php?action=profile" title="User"><i class="fas fa-user"></i> {{ session.get('pseudo') }}</a>
                 </li>
-            {% else %}
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="index.php?action=login"><i class="fas fa-sign-in-alt"></i></a>
+                    <a class="nav-link js-scroll-trigger" href="index.php?action=logout" title="Logout"> <i class="fas fa-sign-out-alt"></i></a>
+                </li>            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="index.php?action=login" title="Login"><i class="fas fa-sign-in-alt"></i></a>
                 </li>
             {% endif %}
         </ul>
@@ -69,15 +71,7 @@
         <div class="col-lg-8 col-md-10 mx-auto">
           <ul class="list-inline text-center">
             <li class="list-inline-item">
-              <a href="#">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
+              <a href="https://fr-fr.facebook.com/public/Adrien-Gatineau">
                 <span class="fa-stack fa-lg">
                   <i class="fas fa-circle fa-stack-2x"></i>
                   <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
@@ -85,13 +79,21 @@
               </a>
             </li>
             <li class="list-inline-item">
+              <a href="https://fr.linkedin.com/in/adriengatineau">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+{#            <li class="list-inline-item">
               <a href="#">
                 <span class="fa-stack fa-lg">
                   <i class="fas fa-circle fa-stack-2x"></i>
                   <i class="fab fa-github fa-stack-1x fa-inverse"></i>
                 </span>
               </a>
-            </li>
+            </li>#}
           </ul>
         </div>
       </div>
@@ -99,13 +101,13 @@
   </footer>
 
   <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Plugin JavaScript -->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-  <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+  <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="../vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 
   <!-- Custom scripts for this template -->
-  <script src="public/js/creative.js"></script>
+  <script src="js/creative.js"></script>
 </html>

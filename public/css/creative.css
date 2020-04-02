@@ -47,6 +47,21 @@
   box-sizing: border-box;
 }
 
+#beige_div{
+    background-color:#E3CFCD;
+    height:calc(100vh - 69px);
+}
+
+#white_div{
+    background-color:white;
+    height:calc(100vh - 69px);
+
+}
+
+form button{
+    margin:20px;
+}
+
 html {
   font-family: sans-serif;
   line-height: 1.15;
@@ -9832,4 +9847,12 @@ header.mastpost .post-heading .meta a {
 
 #portfolio .container-fluid .portfolio-box:hover .portfolio-box-caption {
   opacity: 1;
+}
+
+#overlay{
+    background: linear-gradient(to bottom, rgba(240, 225, 224, 0.6) 0%, rgba(227, 207, 205, 0.6) 100%), url(../img/home-bg.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    /*background-attachment: scroll;*/
+    background-size: cover;
 }
