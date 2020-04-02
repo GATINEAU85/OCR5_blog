@@ -1,0 +1,79 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<body style="background-color:#E3CFCD">
+  <!-- Main Content -->
+ <!-- Contact Section -->
+    <section class="page-section" id="contact">
+        <div class="container jumbotron" style="background-color:white">
+          <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+              <h2 class="mt-0">Profil utilisateur</h2>
+              <hr class="divider my-4">
+              <p class="text-muted mb-5">Rentrez vos informations personnelles</p>
+            </div>
+          </div>
+          <div class="row">
+              <div class="col-3 offset-1 text-left">
+                    <h4 class="mb-30" style="margin-bottom:30px">Paramétrage</h4>  
+                    <div class="row">
+                        <a href="index.php?action=updatePassword">Modification du mot de passe</a>
+                    </div>
+                    <div class="row">
+                        <a href="index.php?action=deleteAccount" style="margin-top:30px">Suppression du compte</a>
+                    </div>
+                    {% if session.get('role') == 'administrator' %}
+                    <div class="row">
+                        <a href="index.php?action=administration" style="margin-top:30px">Administration du blog</a>
+                    </div>
+                    {% endif %}
+              </div>
+              <div class="col-6 offset-1">
+                  <h4 class="text-left mb-30" style="margin-bottom:30px">Informations pesonnelles</h4>  
+                  <form name="updateAccountForm" id="updateAccountForm" action='index.php?action=updateAccount' method="post">
+                    <div class="control-group">
+                      <div class="form-group floating-label-form-group controls">
+                        <label for="userUpdateName">Nom</label>
+                        <input type="text" class="form-control" placeholder="Nom" id="userUpdateName" name="userUpdateName" value="{{ user.name }}"  required data-validation-required-message="Entrez votre nom.">
+                        <p class="help-block text-danger"></p>
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <div class="form-group floating-label-form-group controls">
+                        <label for="userUpdateSurname">Prénom</label>
+                        <input type="text" class="form-control" placeholder="Prénom" id="userUpdateSurname" name="userUpdateSurname" value="{{ user.surname }}" required data-validation-required-message="Entrez votre prénom.">
+                        <p class="help-block text-danger"></p>
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <div class="form-group floating-label-form-group controls">
+                        <label for="userUpdatePseudo">Pseudo</label>
+                        <input type="text" class="form-control" placeholder="Pseudo" id="userUpdatePseudo" name="userUpdatePseudo" value="{{ user.pseudo }}" required data-validation-required-message="Entrez votre pseudo.">
+                        <p class="help-block text-danger"></p>
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <div class="form-group col-xs-12 floating-label-form-group controls">
+                        <label for="userUpdateMail">Mail</label>
+                        <input type="email" class="form-control" placeholder="Mail" id="userUpdateMail" name="userUpdateMail" value="{{ user.mail }}" required data-validation-required-message="Entrez votre mail">
+                        <p class="help-block text-danger"></p>
+                      </div>
+                    </div>
+{#                    <div class="control-group">
+                      <div class="form-group floating-label-form-group controls">
+                        <input type="password" class="form-control" placeholder="Password" id="userUpdatePassword" value="{{ user.pwd }}" name="userUpdatePassword" required data-validation-required-message="Entrez votre mot de passe">
+                        <p class="help-block text-danger"></p>
+                      </div>
+                    </div>#}
+                    <br>
+                    <div id="success"></div>
+                    <div class="form-group text-center">
+                      <button type="submit" class="btn btn-primary  btn-xl" id="userUpdateSubmitAccount" name="userSubmitAccount">Mettre à jour</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+   </section>
+</body>
+{% endblock %}
