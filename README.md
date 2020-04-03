@@ -20,23 +20,23 @@ To show us the differents use case that can be use by the actor of the project.
 
 ### Visit use case
 
-![Use case diagram on the visit use package](/public/files/DiagramSequenceVisit.png)
+![Use case diagram on the visit use package](http://51.15.234.228/projet5/public/files/DiagramSequenceVisit.png)
 
 ### Administration use case
 
-![Use case diagram on the administration use package](/public/files/DiagramSequenceVisit.png)
+![Use case diagram on the administration use package](http://51.15.234.228/projet5/public/files/DiagramSequenceVisit.png)
 
 ## Diagram Class
 
-![Class diagram](/public/files/DiagramSequenceVisit.png)
+![Class diagram](http://51.15.234.228/projet5/public/files/DiagramClass.png)
 
 ## Diagram Sequence
 
 ### Visit sequence
 
-![Sequence diagram on the visit use package](/public/files/DiagramSequenceVisit.png)
+![Sequence diagram on the visit use package](http://51.15.234.228/projet5/public/files/DiagramSequenceVisit.png)
 
 ### Administration sequence
 
-![Sequence diagram on the administration use package](/public/files/DiagramSequenceVisit.png)
+![Sequence diagram on the administration use package](http://51.15.234.228/projet5/public/files/DiagramSequenceVisit.png)
 
