@@ -4,39 +4,38 @@ Hello, I'm Adrien GATINEAU. I decided to create my blog to share news on geomati
 [My Blog ;-)](http://51.15.234.228/projet5/public/index.php?action=home)
 
 
-# Method
+## Method
 This project was maintened and versionned by GitHub
 [GitHub : GATINEAU85 / BlogOCR](https://github.com/GATINEAU85/OCR5_blog)
 
 Differentes issues are made. They was been gradually resolved during the developpement and the creation of pull request. 
 
-# Project
+## Project
 
 This project took place in continuity with my work-study training in web development at openclassrooms.
 
-## Use case
+### Use case
 
 To show us the differents use case that can be use by the actor of the project. 
 
-### Visit use case
+#### Visit use case
 
 ![Use case diagram on the visit use package](http://51.15.234.228/projet5/public/files/DiagramUseCaseVisit.png)
 
-### Administration use case
+#### Administration use case
 
 ![Use case diagram on the administration use package](http://51.15.234.228/projet5/public/files/DiagramUseCaseAdministration.png)
 
-## Diagram Class
+### Diagram Class
 
 ![Class diagram](http://51.15.234.228/projet5/public/files/DiagramClass.png)
 
-## Diagram Sequence
+### Diagram Sequence
 
-### Visit sequence
+#### Visit sequence
 
 ![Sequence diagram on the visit use package](http://51.15.234.228/projet5/public/files/DiagramSequenceVisit.png)
 
-### Administration sequence
+#### Administration sequence
 
 ![Sequence diagram on the administration use package](http://51.15.234.228/projet5/public/files/DiagramSequenceAdministration.png)
-
