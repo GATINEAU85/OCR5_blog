@@ -19,9 +19,36 @@ class Router
         $this->frontController = new FrontController();
         $this->backController = new BackController();
         $this->ErrorController = new ErrorController();
+        
+        $this->name = '';
     }
     public function run()
     {
+        $xml = new \DOMDocument;
+        $xml->load('../config/Routing.xml');
+        $routes = $xml->getElementsByTagName('route');
+
+        // On parcourt les routes du fichier XML.
+        foreach ($routes as $route)
+        {
+            $routingAction = $route->getAttribute("action");
+            $routingCtrl = $route->getAttribute("module");
+            $routingGet = $route->getAttribute("get");
+            $routingPost = $route->getAttribute("post");
+            $routingSession = $route->getAttribute("session");
+
+//            $vars = [];
+
+            // On regarde si des variables sont présentes dans l'URL.
+//            if ($route->hasAttribute('vars')){
+//              $vars = explode(',', $route->getAttribute('vars'));
+//            }
+            $action = $this->request->getGet()->get('action');
+            if ($routingAction == $action){
+                $this->$routingCtrl->$routingAction($this->request->getPost($routingPost), $this->request->getGet()->get($routingGet), $this->request->getSession()->get($routingSession));
+            }
+        }
+        /**
         $route = $this->request->getGet()->get('action');
         try{
             if(isset($route)){
@@ -105,5 +132,6 @@ class Router
         catch(Exception $e){
             $this->ErrorController->errorServer();
         }
+        **/
     }
 }

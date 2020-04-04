@@ -70,7 +70,7 @@
                 <div class="media mb-4 col-10">
                     <div style="display:flex">
                         {% if session.get('id') and session.get('pseudo') == comment.user or  session.get('pseudo') == 'admin'%}
-                            <a href="index.php?action=deleteComment&post={{ post.id }}&id={{ comment.id }}" style="margin:auto 10px auto 10px"><i class="far fa-trash-alt"></i></a>
+                            <a href="index.php?action=deleteComment&id={{ comment.id }}" style="margin:auto 10px auto 10px"><i class="far fa-trash-alt"></i></a>
                         {% endif %}
                         <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
                     </div>

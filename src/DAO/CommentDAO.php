@@ -19,6 +19,15 @@ class CommentDAO extends DAO
         $comment->setPostId($row['post_id']);
         return $comment;
     }
+        
+    public function getComment($commentId)
+    {
+        $query = 'SELECT comment.id, comment.title, comment.date, comment.comment, user.pseudo, comment.post_id FROM comment, user WHERE comment.user_id = user.id AND comment.id = ?';
+        $result = $this->createQuery($query, [$commentId]);       
+        $comment = $result->fetch();
+        $result->closeCursor();
+        return $this->buildObject($comment);
+    }
     
     public function getComments($postId)
     {

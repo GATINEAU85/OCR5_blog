@@ -11,18 +11,18 @@ class BackController extends Controller
         if($post->get('postTitre')) {
             $errors = $this->validation->validate($post, 'Post');
             if(!$errors) {
-                $this->postDAO->addPost($post, $this->session->get('id'));
-                $this->session->set('addPost', 'Le nouveau post a bien été ajouté');
+                $this->postDAO->addPost($post, $this->twig->session->get('id'));
+                $this->twig->session->set('addPost', 'Le nouveau post a bien été ajouté');
                 $post = $this->postDAO->getPosts();
-                echo $this->twig->render('list_post.html.twig', [
+                return $this->twig->render('list_post.html.twig', [
                     'posts' => $post,
                     'key' => 'addPost', 
                     'status' => 'success'
                 ]);
             }
             else{
-                $this->session->set('addPost', $errors);
-                echo $this->twig->render('create_post.html.twig', [
+                $this->twig->session->set('addPost', $errors);
+                return $this->twig->render('create_post.html.twig', [
                     'post' => $post,
                     'key' => 'addPost', 
                     'status' => 'danger'
@@ -30,7 +30,7 @@ class BackController extends Controller
             }
         }
         else{
-            echo $this->twig->render('create_post.html.twig', [
+            return $this->twig->render('create_post.html.twig', [
                 'post' => $post,
             ]);
         }
@@ -43,17 +43,17 @@ class BackController extends Controller
         if($post->get('postTitre')) {
             $errors = $this->validation->validate($post, 'Post');
             if(!$errors){
-                $this->postDAO->updatePost($post,$postId, $this->session->get('id'));
-                $this->session->set('updatePost', 'Le post a bien été modifié');
+                $this->postDAO->updatePost($post,$postId, $this->twig->session->get('id'));
+                $this->twig->session->set('updatePost', 'Le post a bien été modifié');
                 $post = $this->postDAO->getPosts();
-                echo $this->twig->render('list_post.html.twig', [
+                return $this->twig->render('list_post.html.twig', [
                     'posts' => $post,
                     'key' => 'updatePost', 
                     'status' => 'success'
                 ]);
             }else{
-                $this->session->set('updatePost', $errors);
-                echo $this->twig->render('create_post.html.twig', [
+                $this->twig->session->set('updatePost', $errors);
+                return $this->twig->render('create_post.html.twig', [
                     'post' => $article,
                     'key' => 'updatePost', 
                     'status' => 'danger'
@@ -61,33 +61,36 @@ class BackController extends Controller
             }
         }
         else{
-            echo $this->twig->render('create_post.html.twig', [
+            return $this->twig->render('create_post.html.twig', [
                 'post' => $article,
             ]);
         }
     }
     
-    public function deletePost($postId)
+    public function deletePost(Parameter $Post, $postId)
     {
         $this->postDAO->deletePost($postId);
-        $this->session->set('deletePost', 'Le post a bien été supprimé');
+        $this->twig->session->set('deletePost', 'Le post a bien été supprimé');
         
         $posts = $this->postDAO->getPosts();
-        echo $this->twig->render('list_post.html.twig', [
+        return $this->twig->render('list_post.html.twig', [
             'posts'     => $posts,
             'status'   => "success",
             'key'      => "deletePost",
         ]);    
     }
         
-    public function deleteComment($postId, $commentId)
+    public function deleteComment(Parameter $Post, $id)
     {
-        $this->commentDAO->deleteComment($commentId);
-        $this->session->set('deleteComment', 'Le commentaire a bien été supprimé');
-        
-        $post = $this->postDAO->getPost($postId);
-        $comments = $this->commentDAO->getComments($postId);
-        echo $this->twig->render('post.html.twig', [
+        $comment = $this->commentDAO->getComment($id);
+        $commentPostId = $comment->getPostId();
+                
+        $this->commentDAO->deleteComment($id);
+        $this->twig->session->set('deleteComment', 'Le commentaire a bien été supprimé');
+                
+        $post = $this->postDAO->getPost($commentPostId);
+        $comments = $this->commentDAO->getComments($commentPostId);
+        return $this->twig->render('post.html.twig', [
             'post'     => $post,
             'comments' => $comments,
             'status'   => "success",
@@ -97,10 +100,10 @@ class BackController extends Controller
     
     public function profile()
     {
-        $userId = $this->session->get('id');
+        $userId = $this->twig->session->get('id');
         $user = $this->userDAO->getUser($userId);
 
-        echo $this->twig->render('profile.html.twig',[
+        return $this->twig->render('profile.html.twig',[
             "user" => $user,
         ]);
     }
@@ -111,23 +114,23 @@ class BackController extends Controller
         if($post->get('secondPassword') !== null && $post->get('firstPassword') === $post->get('secondPassword')) {
             $errors = $this->validation->validate($post, 'User');
             if(!$errors) {
-                $this->userDAO->updatePassword($post, $this->session->get('id'));
-                $this->session->set('updatePassword', "La mise à jour du mot de passe est effective.");
-                echo $this->twig->render('index.html.twig', [
+                $this->userDAO->updatePassword($post, $this->twig->session->get('id'));
+                $this->twig->session->set('updatePassword', "La mise à jour du mot de passe est effective.");
+                return $this->twig->render('index.html.twig', [
                     'key' => "updatePassword",
                     'status' => 'success'
                 ]);
             }else{
-                $this->session->set('updatePost', $errors);
-                echo $this->twig->render('index.html.twig', [
+                $this->twig->session->set('updatePost', $errors);
+                return $this->twig->render('index.html.twig', [
                     'key' => 'updatePost', 
                     'status' => 'danger'
                 ]);
             }
         }
         else{
-            echo $this->twig->render('updatePassword.html.twig',[
-                'id' => $this->session->get('id'),
+            return $this->twig->render('updatePassword.html.twig',[
+                'id' => $this->twig->session->get('id'),
             ]);
         }
     }
@@ -135,10 +138,10 @@ class BackController extends Controller
             
     public function logout()
     {
-        $this->session->stop();
-        $this->session->start();
-        $this->session->set('logout', 'A bientôt');
-        echo $this->twig->render('index.html.twig', [
+        $this->twig->session->stop();
+        $this->twig->session->start();
+        $this->twig->session->set('logout', 'A bientôt');
+        return $this->twig->render('index.html.twig', [
             'status'   => "success",
             'key'      => "logout",
         ]);
@@ -146,9 +149,9 @@ class BackController extends Controller
     
     public function updateAccount(Parameter $post)
     {
-        $this->userDAO->updateAccount($post, $this->session->get('id'));
-        $this->session->set('updateAccount', 'Votre compte a bien été mis à jour');
-        echo $this->twig->render('index.html.twig', [
+        $this->userDAO->updateAccount($post, $this->twig->session->get('id'));
+        $this->twig->session->set('updateAccount', 'Votre compte a bien été mis à jour');
+        return $this->twig->render('index.html.twig', [
             'status'   => "success",
             'key'      => "updateAccount",
         ]);
@@ -156,11 +159,11 @@ class BackController extends Controller
     
     public function deleteAccount()
     {
-        $this->userDAO->deleteAccount($this->session->get('id'));
-        $this->session->stop();
-        $this->session->start();
-        $this->session->set('deleteAccount', 'Votre compte a bien été supprimé');
-        echo $this->twig->render('index.html.twig', [
+        $this->userDAO->deleteAccount($this->twig->session->get('id'));
+        $this->twig->session->stop();
+        $this->twig->session->start();
+        $this->twig->session->set('deleteAccount', 'Votre compte a bien été supprimé');
+        return $this->twig->render('index.html.twig', [
             'status'   => "success",
             'key'      => "deleteAccount",
         ]);
@@ -169,7 +172,7 @@ class BackController extends Controller
     {
         $posts = $this->postDAO->getPosts();
         $comments = $this->commentDAO->getAllComments();
-        echo $this->twig->render('administration.html.twig', [
+        return $this->twig->render('administration.html.twig', [
             'posts' => $posts,
             'comments' => $comments
         ]);
