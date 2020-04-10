@@ -8,7 +8,7 @@ class Session
 
     public function __construct($session)
     {
-        $this->session = $session;
+        $this->session = &$session;
     }
 
     public function set($name, $value)
