@@ -62,4 +62,4 @@ It's important to import this model of database to have a well function site.
 
 ## Code Analyse
 
-The last codacy analyse is [here](https://app.codacy.com/manual/GATINEAU85/OCR5_blog/dashboard) . I receved a B appreciation.
+The last codacy analyse is [here](https://app.codacy.com/manual/GATINEAU85/OCR5_blog/dashboard?bid=17364969) . I receved a B appreciation.
