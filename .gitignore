@@ -4,3 +4,4 @@ bower_components
 /tmp
 /config/dev.php
 /public/files
+/sql
