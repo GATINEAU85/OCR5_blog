@@ -4,6 +4,7 @@
 
 ## Preview
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/540b75820f3e43808d6b48f2a2b261d1)](https://app.codacy.com/manual/GATINEAU85/OCR5_blog?utm_source=github.com&utm_medium=referral&utm_content=GATINEAU85/OCR5_blog&utm_campaign=Badge_Grade_Dashboard)
 [![Creative Preview](https://startbootstrap.com/assets/img/screenshots/themes/creative.png)](https://blackrockdigital.github.io/startbootstrap-creative/)
 
 **[View Live Preview](https://blackrockdigital.github.io/startbootstrap-creative/)**
