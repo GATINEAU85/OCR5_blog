@@ -39,16 +39,16 @@ To show us the differents use case that can be use by the actor of the project.
 
 ![Sequence diagram on the administration use package](http://51.15.234.228/projet5/public/files/DiagramSequenceAdministration.png)
 
-## Install
+## Install 
 
- 1. Run command : `git https://github.com/GATINEAU85/OCR5_blog.git`
- 2. Run command : `cd OCR5_blog`
- 3. Run command in bash `composer install`
+1. Run command : `git https://github.com/GATINEAU85/OCR5_blog.git`
+2. Run command : `cd OCR5_blog`
+3. Run command in bash `composer install`
 
-## More
+## More 
 
- 1. Config dev environment "App/config/dev.php". Thanks to this file, you can configure your database connection.
-```
+1. Config dev environment "App/config/dev.php". Thanks to this file, you can configure your database connection.
+```php
     const DB_HOST = 'mysql:host=localhost;dbname=projet5blog;charset=utf8';
     const DB_USERNAME = 'root';
     const DB_PWD = '';
@@ -56,7 +56,7 @@ To show us the differents use case that can be use by the actor of the project.
     const HOST = 'localhost';
     const DB_NAME = 'blog';
 ```
- 2. Import database.sql in your database (App/sql/database.sql)
+2. Import database.sql in your database (App/sql/database.sql)
 
 It's important to import this model of database to have a well function site.
 
