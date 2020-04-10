@@ -9856,3 +9856,10 @@ header.mastpost .post-heading .meta a {
     /*background-attachment: scroll;*/
     background-size: cover;
 }
+
+@media only screen and (max-width: 768px) {
+  .postTableHeaderContent, .postTableHeaderAuteur, .postTableHeaderDate, .postTableDataChapo, .postTableDataUser, .postTableDataDate, 
+  .commentTableHeaderContent, .commentTableHeaderDate, .commentTableHeaderAuteur, .commentTableHeaderValidate, .commentTableDataContent, .commentTableDataDate, .commentTableDataUser, .commentTableDataValidate{
+    display:none;
+  }
+}

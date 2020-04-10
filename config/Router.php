@@ -44,10 +44,15 @@ class Router
 //              $vars = explode(',', $route->getAttribute('vars'));
 //            }
             $action = $this->request->getGet()->get('action');
-            if ($routingAction == $action){
-                $this->$routingCtrl->$routingAction($this->request->getPost($routingPost), $this->request->getGet()->get($routingGet), $this->request->getSession()->get($routingSession));
+            if ($action){
+                if ($routingAction == $action){
+                    return $this->$routingCtrl->$routingAction($this->request->getPost($routingPost), $this->request->getGet()->get($routingGet), $this->request->getSession()->get($routingSession));
+                }
+            }else{
+                return $this->frontController->home();
             }
         }
+        return $this->ErrorController->errorNotFound();
         /**
         $route = $this->request->getGet()->get('action');
         try{

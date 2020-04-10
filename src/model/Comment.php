@@ -44,6 +44,12 @@ class Comment
      */
     private $postId;
     
+    /**
+     * @var int
+     * @AnnotationSQLField(field='validate')
+     */
+    private $validate;
+    
 //Getters
     /**
      * @return int
@@ -91,6 +97,14 @@ class Comment
     public function getPostId() 
     {
         return $this->postId;
+    }
+    
+    /**
+     * @return int
+     */
+    public function getValidate() 
+    {
+        return $this->validate;
     }
     
     
@@ -144,4 +158,11 @@ class Comment
       $this->postId = (int) $postId;
     }
     
+    /**
+     * @param int $validate
+     */
+    public function setValidate($validate)
+    {
+      $this->validate = (int) $validate;
+    }
 }

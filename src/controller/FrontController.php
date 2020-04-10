@@ -19,9 +19,9 @@ class FrontController extends Controller
     }
     public function post()
     {
-        $post = $this->postDAO->getPost($_GET['id']);
+        $post = $this->postDAO->getPost($this->get->get('id'));
 
-        $comments = $this->commentDAO->getComments($_GET['id']);
+        $comments = $this->commentDAO->getComments($this->get->get('id'));
 
         return $this->twig->render('post.html.twig', [
             'post' => $post,

@@ -14,21 +14,27 @@
             </div>
           </div>
           <div class="row">
-              <div class="col-3 offset-1 text-left">
+              <div class="col-md-3 offset-md-1 text-left">
                     <h4 class="mb-30" style="margin-bottom:30px">Paramétrage</h4>  
                     <div class="row">
-                        <a href="index.php?action=updatePassword">Modification du mot de passe</a>
+                        <div class="col-12">
+                            <a href="index.php?action=updatePassword">Modification du mot de passe</a>
+                        </div>
                     </div>
                     <div class="row">
-                        <a href="index.php?action=deleteAccount" style="margin-top:30px">Suppression du compte</a>
+                        <div class="col-12">
+                            <a href="index.php?action=deleteAccount" style="margin-top:30px">Suppression du compte</a>
+                        </div>
                     </div>
                     {% if session.get('role') == 'administrator' %}
                     <div class="row">
-                        <a href="index.php?action=administration" style="margin-top:30px">Administration du blog</a>
+                        <div class="col-12">
+                            <a href="index.php?action=administration" style="margin-top:30px">Administration du blog</a>
+                        </div>
                     </div>
                     {% endif %}
               </div>
-              <div class="col-6 offset-1">
+              <div class="col-md-6 offset-md-1">
                   <h4 class="text-left mb-30" style="margin-bottom:30px">Informations pesonnelles</h4>  
                   <form name="updateAccountForm" id="updateAccountForm" action='index.php?action=updateAccount' method="post">
                     <div class="control-group">

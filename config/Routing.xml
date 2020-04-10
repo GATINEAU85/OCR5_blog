@@ -11,6 +11,7 @@
   <route module="frontController" action="post"  get="id" post="" session=""/>
   
   <route module="frontController" action="addComment" get="id" post="" session="id"/>
+  <route module="backController" action="validateComment" get="id" post="" session=""/>
   <route module="backController" action="deleteComment" get="id" post="" session=""/>
   
   <route module="frontController" action="login"  get="" post="" session=""/>
