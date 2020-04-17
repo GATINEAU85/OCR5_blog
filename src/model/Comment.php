@@ -33,10 +33,10 @@ class Comment
     private $date;
         
     /**
-     * @var int
+     * @var string
      * @AnnotationSQLField(field='user_id')
      */
-    private $userId;
+    private $user;
         
     /**
      * @var int
@@ -78,11 +78,11 @@ class Comment
     }
         
     /**
-     * @return int
+     * @return string
      */
-    public function getUserId() 
+    public function getUser() 
     {
-        return $this->userId;
+        return $this->user;
     }
         
     /**
@@ -100,11 +100,11 @@ class Comment
      */
     public function setId($id)
     {
-      $this->news = (int) $id;
+      $this->id = (int) $id;
     } 
     
     /**
-     * @param int $title
+     * @param string $title
      */
     public function setTitle($title)
     {
@@ -112,7 +112,7 @@ class Comment
     }   
     
     /**
-     * @param int $comment
+     * @param string $comment
      */
     public function setComment($comment)
     {
@@ -129,11 +129,11 @@ class Comment
     }
         
     /**
-     * @param int $userId
+     * @param string $user
      */
-    public function setUserId($userId)
+    public function setUser($user)
     {
-      $this->userId = (int) $userId;
+      $this->user = $user;
     }
             
     /**

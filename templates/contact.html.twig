@@ -8,35 +8,29 @@
         <div class="container jumbotron" style="background-color:white">
           <div class="row justify-content-center">
             <div class="col-lg-8 text-center">
-              <h2 class="mt-0">Contactez-moi !</h2>
+              <h2 class="text-uppercase font-weight-bold">Contactez-moi !</h2>
               <hr class="divider my-4">
               <p class="text-muted mb-5">N'hésitez pas à me contacter pour tout renseignement ! </p>
             </div>
           </div>
           <div class="row">
-              <div class="col-6 offset-3" text-center>
-                  <form name="sentMessage" id="contactForm" novalidate>
+              <div class="col-md-6 offset-md-3" text-center>
+                <form name="contactForm" id="contactForm" methode="post" action="index.php?action=contactMe">
                   <div class="control-group">
                     <div class="form-group floating-label-form-group controls">
-                      <input type="text" class="form-control" placeholder="Nom" id="name" required data-validation-required-message="Entrez votre nom.">
+                      <input type="text" class="form-control" placeholder="Nom" id="envoiName"  name="envoiName" required data-validation-required-message="Entrez votre nom.">
                       <p class="help-block text-danger"></p>
                     </div>
                   </div>
                   <div class="control-group">
                     <div class="form-group floating-label-form-group controls">
-                      <input type="email" class="form-control" placeholder="Mail" id="email" required data-validation-required-message="Entrez votre adresse mail">
-                      <p class="help-block text-danger"></p>
-                    </div>
-                  </div>
-                  <div class="control-group">
-                    <div class="form-group col-xs-12 floating-label-form-group controls">
-                      <input type="tel" class="form-control" placeholder="Portable" id="phone" required data-validation-required-message="Entrez votre numéro de téléphone">
+                      <input type="email" class="form-control" placeholder="Mail" id="envoiMail" name="envoiMail" required data-validation-required-message="Entrez votre adresse mail">
                       <p class="help-block text-danger"></p>
                     </div>
                   </div>
                   <div class="control-group">
                     <div class="form-group floating-label-form-group controls">
-                      <textarea rows="5" class="form-control" placeholder="Message" id="message" required data-validation-required-message="Entrez un message"></textarea>
+                      <textarea rows="5" class="form-control" placeholder="Message" id="envoiMessage" name="envoiMessage" required data-validation-required-message="Entrez un message"></textarea>
                       <p class="help-block text-danger"></p>
                     </div>
                   </div>

@@ -8,15 +8,30 @@
       <!-- Post Content Column -->
       <div class="col-lg-8" style="margin-top:60px" >
         <!-- Title -->
+        <p id="postId" style="display:none">{{ post.id }}</p>
         <h1 class="mt-4">{% if post %}{{ post.title }}{% endif %}</h1>
         <!-- Author -->
-        <p class="lead">Posté par <a href="#">{% if post %}{{ post.pseudo }}{% endif %}</a></p>
+        <p class="lead">Posté par {% if post %}{{ post.user }} le {{ post.date }}{% endif %}</p>
+        {%  if session.get(key) %}
+            <div class="alert alert-{{status}} alert-dismissible fade show" role="alert">
+                {% if status == "danger" %}
+                    <strong>Echec : </strong>
+                {% else %}
+                    <strong>Succès : </strong>
+                {% endif %}
+              {{ session.show(key) }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+        {% endif %}
         <hr>
         <!-- Date/Time -->
-        <p>Le {% if post %}{{ post.date }}{% endif %}</p>
+        <p>{% if post %}{{ post.chapo }}{% endif %}</p>
+       
         <hr>
         <!-- Preview Image -->
-        <img class="img-fluid rounded" src="public/img/blog.png" alt="">
+        <img class="img-fluid rounded" src="img/blog.png" alt="">
         <hr>
 
         <!-- Post Content -->
@@ -24,54 +39,67 @@
         <hr>
 
         <!-- Comments Form -->
+        {% if session.get('id') %}
         <div class="card my-4">
           <h5 class="card-header">Poster un commentaire :</h5>
           <div class="card-body">
-            <form action="/addComment">
+            <form id="addCommenetForm" name="addCommentForm" method="post" action="index.php?action=addComment&id={{ post.id }}" >
               <div class="form-group">
-                <textarea class="form-control" rows="3"></textarea>
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <input type="text" class="form-control" placeholder="Titre" id="commentTitre" name="commentTitre" required>
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+                <div class="control-group">
+                  <div class="form-group col-xs-12 floating-label-form-group controls">
+                    <textarea  rows="3" cols="50" type="text" class="form-control" placeholder="Ecrivez votre commentaire" id="commentContenu" name="commentContenu" required data-validation-required-message="Ecrivez votre commentaire"></textarea>
+                    <p class="help-block text-danger"></p>
+                  </div>
+                </div>
               </div>
-              <button type="submit" class="btn btn-primary">Publier</button>
+              <button type="submit" id="submitComment" name="submitComment" class="btn btn-primary">Publier</button>
             </form>
           </div>
         </div>
+        {% endif %}
 
         <!-- Single Comment -->
-        <div class="media mb-4">
-          <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-          <div class="media-body">
-            <h5 class="mt-0">Commenter Name</h5>
-            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-          </div>
-        </div>
-
-        <!-- Comment with nested comments -->
-        <div class="media mb-4">
-          <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-          <div class="media-body">
-            <h5 class="mt-0">Commenter Name</h5>
-            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-
-            <div class="media mt-4">
-              <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-              <div class="media-body">
-                <h5 class="mt-0">Commenter Name</h5>
-                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-              </div>
+            {% for comment in comments %}
+            <div class="row">
+                <div class="media mb-4 col-10">
+                    <div style="display:flex">
+                        {% if session.get('id') and session.get('pseudo') == comment.user or  session.get('pseudo') == 'admin'%}
+                            <a href="index.php?action=deleteComment&post={{ post.id }}&id={{ comment.id }}" style="margin:auto 10px auto 10px"><i class="far fa-trash-alt"></i></a>
+                        {% endif %}
+                        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                    </div>
+                    <div class="media-body">
+                        <h5 class="mt-0"><em>{{ comment.user }}</em> : {{ comment.title }}</h5>
+                        <p>{{ comment.comment }}</p>
+                    </div>
+                </div>
             </div>
-
-            <div class="media mt-4">
-              <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-              <div class="media-body">
-                <h5 class="mt-0">Commenter Name</h5>
-                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-              </div>
-            </div>
-
-          </div>
+            {% endfor %}
+{#        {% endif %}#}
         </div>
-
-      </div>
+        
+        {% if session.get('role') == 'administrator' %}
+        <div class="col-lg-4 text-center" style="margin-top:85px" >
+            <div class="row">
+                <div class="col-12">
+                    <h5>Edition</h5>
+                    <a class="btn btn-primary btn-xl js-scroll-trigger" href="index.php?action=updatePost&id={{ post.id }}">Mettre à jour mon post</a>
+                </div>
+            </div>
+            <div class="row" style="margin-top:50px" >
+                <div class="col-12">
+                    <h5>Suppression</h5>
+                    <a class="btn btn-primary btn-xl js-scroll-trigger" href="index.php?action=deletePost&id={{ post.id }}">Suppression du post</a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
     </div>
 </div>
 </body>

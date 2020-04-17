@@ -1,26 +1,67 @@
 <?php
+namespace App\src\DAO;
 
-require_once("Manager.php");
+use App\config\Parameter;
+use App\src\model\Post;
 
-class PostManager extends Manager
+class PostDAO extends DAO
 {
+    private function buildObject($row)
+    {
+        $post = new Post();
+        $post->setId($row['id']);
+        $post->setTitle($row['title']);
+        $post->setChapo($row['chapo']);
+        $post->setContent($row['content']);
+        $post->setDate($row['date']);
+        $post->setUser($row['pseudo']);
+        return $post;
+    }
     public function getPosts()
     {
-        $db = $this->dbConnect();
-//        $req = $db->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM post ORDER BY creation_date DESC LIMIT 0, 5');
-        $req = $db->query('SELECT post.id, post.title, post.chapo, post.content, user.pseudo, post.date FROM post, user WHERE user.id = post.user_id ORDER BY date DESC LIMIT 0, 5');
-        $posts = $req->fetchall();
-
+        $query = 'SELECT post.id, post.title, post.chapo, post.content, post.user_id, user.pseudo, post.date FROM post, user WHERE user.id = post.user_id ORDER BY date DESC LIMIT 0, 5';
+        $result = $this->createQuery($query);
+        $posts = [];
+        foreach ($result as $row){
+            $postId = $row['id'];
+            $posts[$postId] = $this->buildObject($row);
+        }
+        $result->closeCursor();
         return $posts;
     }
 
     public function getPost($postId)
     {
-        $db = $this->dbConnect();
-        $req = $db->prepare('SELECT post.id, post.title, post.chapo, post.content, user.pseudo, post.date FROM post, user WHERE user.id = post.user_id AND post.id = ?');
-        $req->execute(array($postId));
-        $post = $req->fetch();
+        $query = 'SELECT post.id, post.title, post.chapo, post.content,  post.user_id, user.pseudo, post.date FROM post, user WHERE user.id = post.user_id AND post.id = ?';
+        $result = $this->createQuery($query, [$postId]);
+        $post = $result->fetch();
+        $result->closeCursor();
+        return $this->buildObject($post);
+    }
+    
+    public function addPost(Parameter $post, $userId)
+    {
+        $query = 'INSERT INTO post (title, chapo, content, date, user_id) VALUES(?,?,?, NOW(), ?)';
+        $this->createQuery($query,[$post->get('postTitre'), $post->get('postChapo'), $post->get('postContenu'), $userId]);
+    }
         
-        return $post;
+    public function updatePost(Parameter $post, $postId, $userId)
+    {
+        $query = 'UPDATE post SET title=:title, chapo=:chapo, content=:content, date=NOW(), user_id=:userId WHERE id=:postId';
+        $this->createQuery($query,[
+            'title' => $post->get('postTitre'), 
+            'chapo' => $post->get('postChapo'), 
+            'content' => $post->get('postContenu'),
+            'userId' => $userId,
+            'postId' => $postId,
+        ]);
+    }
+            
+    public function deletePost($postId)
+    {
+        $query = 'DELETE FROM comment WHERE post_id = ?';
+        $this->createQuery($query, [$postId]);
+        $query = 'DELETE FROM post WHERE id = ?';
+        $this->createQuery($query,[$postId]);
     }
 }

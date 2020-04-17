@@ -39,10 +39,10 @@ class Post
     private $date;
     
     /**
-     * @var int
+     * @var string
      * @AnnotationSQLField(field='user_id')
      */
-    private $userId;
+    private $user;
     
 //Getters
     /**
@@ -86,11 +86,11 @@ class Post
     }
     
     /**
-     * @return int
+     * @return string
      */
-    public function getUserId() 
+    public function getUser() 
     {
-        return $this->userId;
+        return $this->user;
     }
     
     
@@ -138,11 +138,11 @@ class Post
     }
     
     /**
-     * @param int $userId
+     * @param int $user
      */
-    public function setUserId($userId)
+    public function setUser($user)
     {
-      $this->userId = (int) $userId;
+      $this->user = $user;
     }
     
     
