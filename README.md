@@ -52,11 +52,8 @@ To show us the differents use case that can be use by the actor of the project.
     const DB_HOST = 'mysql:host=localhost;dbname=projet5blog;charset=utf8';
     const DB_USERNAME = 'root';
     const DB_PWD = '';
-    const CHARSET = 'utf8';
-    const HOST = 'localhost';
-    const DB_NAME = 'blog';
 ```
-2. Import database.sql in your database (App/sql/database.sql)
+2. Import database.sql in your database (App/sql/database.sql) : `mysql --user=mon_user --password=mon_password nom_de_la_base < database.sql`
 
 It's important to import this model of database to have a well function site.
 

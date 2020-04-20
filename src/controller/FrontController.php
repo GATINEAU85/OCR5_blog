@@ -44,8 +44,7 @@ class FrontController extends Controller
                     'status' => "success",
                     'key' => 'addComment'
                 ]);
-            }
-            else{
+            }else{
                 $this->twig->session->set('addComment', $errors);
                 $post = $this->postDAO->getPost($id);
                 $comments = $this->commentDAO->getComments($id);
@@ -56,6 +55,16 @@ class FrontController extends Controller
                     'key'      => "addComment", 
                 ]);
             }
+        }else{
+            $this->twig->session->set('addComment', "Une erreur est présente dans la saisie.");
+            $post = $this->postDAO->getPost($id);
+            $comments = $this->commentDAO->getComments($id);
+            return $this->twig->render('post.html.twig', [
+                'post'     => $post,
+                'comments' => $comments,
+                'status'   => "danger",
+                'key'      => "addComment", 
+            ]);
         }
     }
     
@@ -71,7 +80,6 @@ class FrontController extends Controller
     {
         if($post->get('logPseudo')) {
             $result = $this->userDAO->login($post);
-//            var_dump($result);
             if($result && $result['isPasswordValid']) {
                 $this->twig->session->set('login', 'Ravi de vous revoir parmis nous !');
                 $this->twig->session->set('id', $result['result']['id']);
@@ -110,11 +118,16 @@ class FrontController extends Controller
                     'key' => 'createUser',
                     'status' => 'success'
                 ]);
+            }else{
+                foreach($errors as $error){
+                    $this->twig->session->set('createUser', $error);
+                    return $this->twig->render('create_account.html.twig', [
+                        'post' => $post,
+                        'key' => 'createUser',
+                        'status' => 'danger'
+                    ]);
+                }
             }
-            return $this->twig->render('create_account.html.twig', [
-                'post' => $post,
-                'errors' => $errors,
-            ]);
         }else{
             return $this->twig->render('create_account.html.twig');
         }

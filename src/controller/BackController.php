@@ -37,6 +37,7 @@ class BackController extends Controller
     {
         if($this->checkAdmin()) {
             if($post->get('postTitre')) {
+//                var_dump($post);
                 $errors = $this->validation->validate($post, 'Post');
                 if(!$errors) {
                     $this->postDAO->addPost($post, $this->twig->session->get('id'));
@@ -49,12 +50,16 @@ class BackController extends Controller
                     ]);
                 }
                 else{
-                    $this->twig->session->set('addPost', $errors);
-                    return $this->twig->render('create_post.html.twig', [
-                        'post' => $post,
-                        'key' => 'addPost', 
-                        'status' => 'danger'
-                    ]);
+//                    var_dump($errors);
+                    foreach($errors as $error){
+                        $this->twig->session->set('addPost', $error);
+//                        var_dump($error);
+                        return $this->twig->render('create_post.html.twig', [
+                            'post' => $post,
+                            'key' => 'addPost', 
+                            'status' => 'danger'
+                        ]);
+                    }
                 }
             }
             else{
@@ -82,12 +87,14 @@ class BackController extends Controller
                         'status' => 'success'
                     ]);
                 }else{
-                    $this->twig->session->set('updatePost', $errors);
-                    return $this->twig->render('create_post.html.twig', [
-                        'post' => $article,
-                        'key' => 'updatePost', 
-                        'status' => 'danger'
-                    ]);
+                    foreach($errors as $error){
+                        $this->twig->session->set('updatePost', $error);
+                        return $this->twig->render('create_post.html.twig', [
+                            'post' => $article,
+                            'key' => 'updatePost', 
+                            'status' => 'danger'
+                        ]);
+                    }
                 }
             }
             else{
@@ -170,21 +177,23 @@ class BackController extends Controller
     {
         if($this->checkLoggedIn()) {
             if($post->get('secondPassword') !== null && $post->get('firstPassword') === $post->get('secondPassword')) {
-                $errors = $this->validation->validate($post, 'User');
-                if(!$errors) {
+//                $errors = $this->validation->validate($post, 'User');
+//                if(!$errors) {
                     $this->userDAO->updatePassword($post, $this->twig->session->get('id'));
                     $this->twig->session->set('updatePassword', "La mise à jour du mot de passe est effective.");
                     return $this->twig->render('index.html.twig', [
                         'key' => "updatePassword",
                         'status' => 'success'
                     ]);
-                }else{
-                    $this->twig->session->set('updatePost', $errors);
-                    return $this->twig->render('index.html.twig', [
-                        'key' => 'updatePost', 
-                        'status' => 'danger'
-                    ]);
-                }
+//                }else{
+//                    foreach($errors as $error){
+//                        $this->twig->session->set('updatePost', $error);
+//                        return $this->twig->render('index.html.twig', [
+//                            'key' => 'updatePost', 
+//                            'status' => 'danger'
+//                        ]);
+//                    }
+//                }
             }
             else{
                 return $this->twig->render('updatePassword.html.twig',[
@@ -211,12 +220,23 @@ class BackController extends Controller
     public function updateAccount(Parameter $post)
     {
         if($this->checkLoggedIn()) {
-            $this->userDAO->updateAccount($post, $this->twig->session->get('id'));
-            $this->twig->session->set('updateAccount', 'Votre compte a bien été mis à jour');
-            return $this->twig->render('index.html.twig', [
-                'status'   => "success",
-                'key'      => "updateAccount",
-            ]);
+//            $errors = $this->validation->validate($post, 'User');
+//            if(!$errors) {
+                $this->userDAO->updateAccount($post, $this->twig->session->get('id'));
+                $this->twig->session->set('updateAccount', 'Votre compte a bien été mis à jour');
+                return $this->twig->render('index.html.twig', [
+                    'status'   => "success",
+                    'key'      => "updateAccount",
+                ]);
+//            }else{
+//                foreach($errors as $error){
+//                    $this->twig->session->set('updateAccount', $error);
+//                    return $this->twig->render('index.html.twig', [
+//                        'key' => 'updatePost', 
+//                        'status' => 'danger'
+//                    ]);
+//                }
+//            }
         }
     }
     

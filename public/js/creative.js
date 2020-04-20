@@ -56,8 +56,8 @@
       tError: "<a href='%url%'>The image #%curr%</a> could not be loaded."
     }
   });    
-    
-    $(".alert").fadeTo(1000, 0).slideUp(1000, function(){
+  
+    $(".alert").delay(1000).fadeTo(1000, 0).slideUp(1000, function(){
         $(this).remove(); 
     });
 })(jQuery); // End of use strict

@@ -14,6 +14,19 @@
             </div>
           </div>
           <div class="row">
+            {%  if session.get(key) %}
+                <div class="alert alert-{{status}} alert-dismissible fade show" role="alert">
+                    {% if status == "danger" %}
+                        <strong>Echec : </strong>
+                    {% else %}
+                        <strong>Succès : </strong>
+                    {% endif %}
+                  {{ session.show(key) }}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+            {% endif %}
               <div class="col-6 offset-3 text-center">
                   <form name="createAccountForm" id="createAccountForm" action='index.php?action=createAccount' method="post">
                     <div class="control-group">

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\src\constraint;
+namespace App\src\Constraint;
 use App\config\Parameter;
 
 class PostValidation extends Validation
@@ -16,6 +16,8 @@ class PostValidation extends Validation
     public function check(Parameter $post)
     {
         foreach ($post->all() as $key => $value) {
+//            var_dump($key);
+//            var_dump($value);
             $this->checkField($key, $value);
         }
         return $this->errors;
@@ -23,16 +25,16 @@ class PostValidation extends Validation
 
     private function checkField($name, $value)
     {
-        if($name === 'title') {
+        if($name === 'postTitre') {
             $error = $this->checkTitle($name, $value);
             $this->addError($name, $error);
         }
-        elseif ($name === 'chapo') {
+        elseif ($name === 'postChapo') {
             $error = $this->checkContent($name, $value);
             $this->addError($name, $error);
         }
-        elseif($name === 'content') {
-            $error = $this->checkAuthor($name, $value);
+        elseif($name === 'postContenu') {
+            $error = $this->checkContent($name, $value);
             $this->addError($name, $error);
         }
     }
@@ -48,33 +50,33 @@ class PostValidation extends Validation
     private function checkTitle($name, $value)
     {
         if($this->constraint->notBlank($name, $value)) {
-            return $this->constraint->notBlank('titre', $value);
+            return $this->constraint->notBlank('postTitre', $value);
         }
         if($this->constraint->minLength($name, $value, 2)) {
-            return $this->constraint->minLength('titre', $value, 2);
+            return $this->constraint->minLength('postTitre', $value, 2);
         }
         if($this->constraint->maxLength($name, $value, 255)) {
-            return $this->constraint->maxLength('titre', $value, 255);
+            return $this->constraint->maxLength('postTitre', $value, 255);
         }
     }
 
     private function checkChapo($name, $value)
     {
         if($this->constraint->notBlank($name, $value)) {
-            return $this->constraint->notBlank('chapo', $value);
+            return $this->constraint->notBlank('postChapo', $value);
         }
         if($this->constraint->minLength($name, $value, 2)) {
-            return $this->constraint->minLength('chapo', $value, 2);
+            return $this->constraint->minLength('postChapo', $value, 2);
         }
     }
     
     private function checkContent($name, $value)
     {
         if($this->constraint->notBlank($name, $value)) {
-            return $this->constraint->notBlank('content', $value);
+            return $this->constraint->notBlank('postContenu', $value);
         }
         if($this->constraint->minLength($name, $value, 2)) {
-            return $this->constraint->minLength('content', $value, 2);
+            return $this->constraint->minLength('postContenu', $value, 2);
         }
     }
 }
