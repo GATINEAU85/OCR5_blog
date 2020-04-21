@@ -15,6 +15,19 @@
           </div>
           <div class="row">
               <div class="col-6 offset-3" text-center>
+                {%  if session.get(key) %}
+                    <div class="alert alert-{{status}} alert-dismissible fade show" role="alert">
+                        {% if status == "danger" %}
+                            <strong>Echec : </strong>
+                        {% else %}
+                            <strong>Succès : </strong>
+                        {% endif %}
+                      {{ session.show(key) }}
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                {% endif %}
                   <form name="addPostForm" id="addPostForm" method="post" action="index.php?action={% if post.id %}updatePost&id={{ post.id }}{% else %}addPost{% endif %}" >
                   <div class="control-group" style="display:none">
                     <div class="form-group floating-label-form-group controls">

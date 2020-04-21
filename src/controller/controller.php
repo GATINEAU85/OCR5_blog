@@ -6,9 +6,10 @@ use App\src\DAO\PostDAO;
 use App\src\DAO\UserDAO;
 use App\src\DAO\CommentDAO;
 use App\config\Request;
+use App\src\model\Twig;
 use App\src\Constraint\Validation;
 
-abstract class Controller extends TwigController
+abstract class Controller /**extends TwigController**/
 {
     protected $twig;
     protected $commentDAO;
@@ -21,7 +22,7 @@ abstract class Controller extends TwigController
     
     public function __construct()
     {
-        $this->twig = parent::twigLoader();
+        $this->twig = new Twig();
         $this->postDAO = new PostDAO();
         $this->userDAO = new UserDAO();
         $this->commentDAO = new CommentDAO();

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\src\constraint;
+namespace App\src\Constraint;
 use App\config\Parameter;
 
 class CommentValidation extends Validation

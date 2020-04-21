@@ -1,4 +1,7 @@
 node_modules
 bower_components
 /vendor
+/tmp
 /config/dev.php
+/public/files
+

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\src\constraint;
+namespace App\src\Constraint;
 use App\config\Parameter;
 
 class UserValidation extends Validation
@@ -15,6 +15,7 @@ class UserValidation extends Validation
 
     public function check(Parameter $post)
     {
+        //var_dump($post);
         foreach ($post->all() as $key => $value) {
             $this->checkField($key, $value);
         }

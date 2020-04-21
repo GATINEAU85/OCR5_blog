@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<routes>
+  <route module="frontController" action="home"  get="" post="" session=""/>
+  <route module="frontController" action="listPosts" get="" post="" session=""/>
+  <route module="frontController" action="about" get="" post="" session=""/>
+  <route module="frontController" action="contact" get="" post="" session=""/>
+  
+  <route module="backController" action="addPost" get="" post="" session=""/>
+  <route module="backController" action="updatePost"  get="id" post="" session=""/>
+  <route module="backController" action="deletePost"  get="id" post="" session=""/>
+  <route module="frontController" action="post"  get="id" post="" session=""/>
+  
+  <route module="frontController" action="addComment" get="id" post="" session="id"/>
+  <route module="backController" action="validateComment" get="id" post="" session=""/>
+  <route module="backController" action="deleteComment" get="id" post="" session=""/>
+  
+  <route module="frontController" action="login"  get="" post="" session=""/>
+  <route module="backController" action="logout"  get="" post="" session=""/>
+  <route module="backController" action="profile" get="" post="" session="" />
+  <route module="frontController" action="createAccount" get="" post="" session=""/>
+  <route module="backController" action="updatePassword" get="" post="" session=""/>
+  <route module="backController" action="updateAccount" get="" post="" session=""/>
+  <route module="backController" action="deleteAccount" get="" post="" session=""/>
+  <route module="backController" action="administration" vars="news" />
+  
+  <route module="frontController" action="contactMe" vars="news" get="" post="" session=""/>
+  
+  <route module="ErrorController" action="error" vars="news" get="" post="" session=""/>
+  
+  <route module="frontController" action="home" get="" post="" session=""/>
+</routes>

@@ -39,26 +39,26 @@
 {#        <hr>#}
         {#Blog administration part#}  
         <div class="row justify-content-center"{# style="margin-top:30px"#}>
-          <div class="col-lg-12">
+          <div class="col-lg-12 col-12">
                 <h3 class="mt-0">Blog Post</h3>
                 <p>Pour ajouter des blogs posts, c'est <a href="index.php?action=addPost">ici</a> !</p>
 {#                <hr class="divider my-4">#}
-                <table class="table text-center">
+                <table id="postAdministrationTable" class="table text-center col-12">
                   <tr>
                       <th>Id</th>
                       <th>Titre</th>
-                      <th>Contenu</th>
-                      <th>Auteur</th>
-                      <th>Date</th>
+                      <th class="postTableHeaderContent">Contenu</th>
+                      <th class="postTableHeaderAuteur">Auteur</th>
+                      <th class="postTableHeaderDate">Date</th>
                       <th>Actions</th>
                   </tr>
                   {% for post in posts %}
                   <tr>
                       <td>{{ post.id }}</td>
-                      <td><a href="">{{ post.title }}</a></td>
-                      <td>{{ post.chapo }}</td>
-                      <td>{{ post.user }}</td>
-                      <td>{{ post.date }}</td>
+                      <td><a href="index.php?action=post&id={{ post.id }}">{{ post.title }}</a></td>
+                      <td class="postTableDataChapo">{{ post.chapo }}</td>
+                      <td class="postTableDataUser">{{ post.user }}</td>
+                      <td class="postTableDataDate">{{ post.date }}</td>
                       <td>
                           <a href="index.php?action=updatePost&id={{ post.id }}"><i class="fas fa-edit"></i></a>
                           <a href="index.php?action=deletePost&id={{ post.id }}"><i class="fas fa-trash-alt"></i></a>
@@ -73,25 +73,28 @@
         <div class="row justify-content-center"{# style="margin-top:30px"#}>
           <div class="col-lg-12">
                 <h3 class="mt-0">Commentaire</h3>
-                <table class="table text-center">
+                <table id="commentAdministrationTable" class="table text-center">
                     <tr>
                         <th>Id</th>
                         <th>Titre</th>
-                        <th>Contenu</th>
-                        <th>Date</th>
-                        <th>Auteur</th>
+                        <th class="commentTableHeaderContent">Contenu</th>
+                        <th class="commentTableHeaderDate">Date</th>
+                        <th class="commentTableHeaderAuteur">Auteur</th>
+                        <th class="commentTableHeaderValidate">Valide</th>
                         <th>Actions</th>
                     </tr>
                   {% for comment in comments %}
                   <tr>
                       <td>{{ comment.id }}</td>
                       <td><a href="">{{ comment.title }}</a></td>
-                      <td>{{ comment.comment }}</td>
-                      <td>{{ comment.date }}</td>
+                      <td class="commentTableDataContent">{{ comment.comment }}</td>
+                      <td class="commentTableDataDate">{{ comment.date }}</td>
 {#                      <td>{{ comment.post_id }}</td>#}
-                      <td>{{ comment.user }}</td>
+                      <td class="commentTableDataUser">{{ comment.user }}</td>
+                      <td class="commentTableDataValidate">{% if comment.validate == 0 %}Non{% else %}Oui{% endif %}</td>
                       <td>
-                          <a href="index.php?action=post&id={{ comment.postId }}"><i class="fas fa-edit"></i></a>
+                          {% if comment.validate == 0 %}<a href="index.php?action=validateComment&id={{ comment.id }}"><i class="fas fa-check-square"></i></a>{% endif %}
+                          {#<a href="index.php?action=post&id={{ comment.postId }}"><i class="fas fa-edit"></i></a>#}
                           <a href="index.php?action=deleteComment&post={{ comment.postId }}&id={{ comment.id }}"><i class="fas fa-trash-alt"></i></a>
                       </td>
                   </tr>
